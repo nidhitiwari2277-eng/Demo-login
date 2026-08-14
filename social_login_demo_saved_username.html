@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Login Demo</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;min-height:100vh;background:#fafafa;display:flex;justify-content:center;align-items:center}
+.login-box{width:350px;padding:40px 35px;background:white;border:1px solid #ddd;text-align:center}
+.logo{font-size:34px;font-weight:bold;margin-bottom:35px}
+input{width:100%;padding:12px;margin:6px 0;border:1px solid #ccc;border-radius:4px;background:#fafafa}
+button{width:100%;padding:11px;margin-top:15px;border:none;border-radius:5px;background:#0095f6;color:white;font-weight:bold;cursor:pointer}
+.demo{margin-top:20px;color:#777;font-size:13px}
+#message{margin-top:15px;color:#0095f6;font-size:14px}
+</style>
+</head>
+<body>
+<div class="login-box">
+<div class="logo">SocialApp</div>
+<input type="text" id="username" placeholder="Demo username">
+<input type="password" id="password" placeholder="Password (not saved)">
+<button onclick="demoLogin()">Log in</button>
+<div id="message"></div>
+<div class="demo">Demo only — username is saved locally; password is never stored or sent.</div>
+</div>
+<script>
+function demoLogin(){
+  const username=document.getElementById("username").value.trim();
+  if(!username){
+    document.getElementById("message").textContent="Please enter a demo username.";
+    return;
+  }
+  localStorage.setItem("demoUsername",username);
+  document.getElementById("message").textContent="Demo username saved locally!";
+}
+window.onload=function(){
+  const saved=localStorage.getItem("demoUsername");
+  if(saved) document.getElementById("username").value=saved;
+};
+</script>
+</body>
+</html>
